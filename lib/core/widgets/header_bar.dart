@@ -35,7 +35,7 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Icon(
-                  Icons.warning_amber,
+                  Icons.notifications,
                   color: AppColors.errorRed,
                   size: 20,
                 ),

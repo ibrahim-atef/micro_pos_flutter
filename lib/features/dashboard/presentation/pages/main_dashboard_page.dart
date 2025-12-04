@@ -13,6 +13,8 @@ import '../../../cash_box/presentation/pages/cash_box_menu_page.dart';
 import '../../../expenses/presentation/pages/expenses_menu_page.dart';
 import '../../../reports/presentation/pages/reports_menu_page.dart';
 import '../../../settings/presentation/pages/settings_menu_page.dart';
+import '../../../taxes/presentation/pages/taxes_page.dart';
+import '../../../printer/presentation/pages/printer_settings_page.dart';
 import '../../../operations/presentation/pages/operation_placeholder_page.dart';
 
 /// Dashboard root page for the POS feature module.
@@ -32,8 +34,6 @@ class MainDashboardPage extends StatefulWidget {
 class _MainDashboardPageState extends State<MainDashboardPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String currentScreen = 'dashboard';
-  bool showRegisterModal = false;
-  int? selectedRegister;
   String? operationTitle;
 
   final Map<String, String> operationTitles = {
@@ -48,8 +48,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     'transfer_customers_suppliers': 'التحويل بين العملاء والموردين',
     'damaged_products': 'معالجة المنتجات الثالفة',
     'price_display': 'شاشة عرض الاسعار',
-    'taxes': 'الضرائب',
-    'printer': 'الطابعه',
     'activate_program': 'تفعيل البرنامج',
     'backup': 'النسخ الاحتياطي',
     'data_backup': 'النسخ الاحتياطي للبيانات',
@@ -61,9 +59,14 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   void _handleMenuClick(String menuId) {
     setState(() {
       if (menuId == 'sales') {
-        showRegisterModal = true;
+        // افتح شاشة المبيعات مباشرة
+        currentScreen = 'sales';
       } else if (menuId == 'settings') {
         currentScreen = 'settings';
+      } else if (menuId == 'taxes') {
+        currentScreen = 'taxes';
+      } else if (menuId == 'printer') {
+        currentScreen = 'printer';
       } else if ([
         'customers',
         'suppliers',
@@ -92,14 +95,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     }
   }
 
-  void _handleRegisterSelect(int registerNum) {
-    setState(() {
-      selectedRegister = registerNum;
-      showRegisterModal = false;
-      currentScreen = 'sales';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -120,7 +115,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
         body: Stack(
           children: [
             _buildCurrentScreen(),
-            if (showRegisterModal) _buildRegisterModal(),
           ],
         ),
       ),
@@ -134,7 +128,6 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       case 'sales':
         return SalesMenuPage(
           onBack: () => setState(() => currentScreen = 'dashboard'),
-          registerNum: selectedRegister,
         );
       case 'purchases':
         return PurchasesMenuPage(
@@ -166,6 +159,14 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
         );
       case 'settings':
         return SettingsMenuPage(
+          onBack: () => setState(() => currentScreen = 'dashboard'),
+        );
+      case 'taxes':
+        return TaxesPage(
+          onBack: () => setState(() => currentScreen = 'dashboard'),
+        );
+      case 'printer':
+        return PrinterSettingsPage(
           onBack: () => setState(() => currentScreen = 'dashboard'),
         );
       case 'operation':
@@ -253,79 +254,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
             },
           ),
         ),
-        Positioned(
-          bottom: 16,
-          left: 16,
-          child: FloatingActionButton(
-            onPressed: () => _showNotificationDialog(),
-            backgroundColor: AppColors.primaryPurple,
-            child: const Icon(Icons.settings, color: Colors.white, size: 28),
-          ),
-        ),
       ],
-    );
-  }
-
-  Widget _buildRegisterModal() {
-    return Container(
-      color: Colors.black.withOpacity(0.5),
-      child: Center(
-        child: Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(32),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'فتح شاشه بيع رقم',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 32),
-              ...List.generate(4, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: ElevatedButton(
-                    onPressed: () => _handleRegisterSelect(index + 1),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.accentGreen,
-                      foregroundColor: AppColors.textPrimary,
-                      minimumSize: const Size(double.infinity, 48),
-                    ),
-                    child: Text('شاشه بيع رقم ${index + 1}'),
-                  ),
-                );
-              }),
-              ElevatedButton(
-                onPressed: () => _handleRegisterSelect(0),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.accentGreen,
-                  foregroundColor: AppColors.textPrimary,
-                  minimumSize: const Size(double.infinity, 48),
-                ),
-                child: const Text('عرض سعر'),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => setState(() => showRegisterModal = false),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryPurple,
-                  minimumSize: const Size(double.infinity, 48),
-                ),
-                child: const Text('تصفيه جميع الشاشات'),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 

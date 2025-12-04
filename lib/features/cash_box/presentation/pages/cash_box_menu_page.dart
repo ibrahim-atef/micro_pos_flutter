@@ -12,6 +12,8 @@ class CashBoxMenuPage extends StatefulWidget {
 }
 
 class _CashBoxMenuState extends State<CashBoxMenuPage> {
+  /// true = اضافه للصندوق, false = خصم من الصندوق
+  bool isAddToCashBox = true;
   String amount = '0';
   String date = DateTime.now().toString().split(' ')[0];
   String statement = '';
@@ -52,26 +54,28 @@ class _CashBoxMenuState extends State<CashBoxMenuPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add),
-                      label: const Text('اضافه للصندوق'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.accentGreen,
-                        foregroundColor: Colors.black,
-                      ),
+                    child: _buildModeButton(
+                      isSelected: isAddToCashBox,
+                      title: 'اضافه للصندوق',
+                      icon: Icons.add,
+                      onTap: () {
+                        setState(() {
+                          isAddToCashBox = true;
+                        });
+                      },
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(Icons.remove),
-                      label: const Text('خصم من الصندوق'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                      ),
+                    child: _buildModeButton(
+                      isSelected: !isAddToCashBox,
+                      title: 'خصم من الصندوق',
+                      icon: Icons.remove,
+                      onTap: () {
+                        setState(() {
+                          isAddToCashBox = false;
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -100,9 +104,11 @@ class _CashBoxMenuState extends State<CashBoxMenuPage> {
                     ),
                     const SizedBox(height: 16),
                     CheckboxListTile(
-                      title: const Text('اضافة مبالغ المبيعات والعملاء للصندوق'),
+                      title:
+                          const Text('اضافة مبالغ المبيعات والعملاء للصندوق'),
                       value: addSales,
-                      onChanged: (v) => setState(() => addSales = v ?? addSales),
+                      onChanged: (v) =>
+                          setState(() => addSales = v ?? addSales),
                     ),
                     CheckboxListTile(
                       title: const Text(
@@ -153,7 +159,10 @@ class _CashBoxMenuState extends State<CashBoxMenuPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // يمكن لاحقاً استخدام isAddToCashBox لتحديد نوع الحركة
+                        // true => إضافة للصندوق, false => خصم من الصندوق
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[400],
                         foregroundColor: Colors.black,
@@ -171,4 +180,24 @@ class _CashBoxMenuState extends State<CashBoxMenuPage> {
   }
 }
 
-
+/// زر نمط (اختيار واحد من اثنين) لاضافة / خصم من الصندوق
+Widget _buildModeButton({
+  required bool isSelected,
+  required String title,
+  required IconData icon,
+  required VoidCallback onTap,
+}) {
+  return ElevatedButton.icon(
+    onPressed: onTap,
+    icon: Icon(
+      icon,
+      color: isSelected ? Colors.black : Colors.grey[700],
+    ),
+    label: Text(title),
+    style: ElevatedButton.styleFrom(
+      backgroundColor: isSelected ? AppColors.accentGreen : Colors.grey[300],
+      foregroundColor: Colors.black,
+      elevation: isSelected ? 2 : 0,
+    ),
+  );
+}

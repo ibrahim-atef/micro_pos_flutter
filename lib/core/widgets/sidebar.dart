@@ -81,23 +81,23 @@ class SidebarMenu extends StatelessWidget {
                 _MenuItem('الاعدادات', Icons.settings, 'settings'),
                 _MenuItem('الضرائب', Icons.description, 'taxes'),
                 _MenuItem('الطابعه', Icons.print, 'printer'),
-                _MenuItem('تفعيل البرنامج', Icons.lock, 'activate_program'),
+                // _MenuItem('تفعيل البرنامج', Icons.lock, 'activate_program'),
               ],
             ),
 
-            _buildMenuSection(
-              'النسخ الاحتياطي والمساعدة',
-              [
-                _MenuItem('النسخ الاحتياطي', Icons.backup, 'backup'),
-                _MenuItem('النسخ الاحتياطي للبيانات', Icons.cloud_upload,
-                    'data_backup'),
-                _MenuItem('المساعدة', Icons.help, 'help'),
-                _MenuItem(
-                    'تحديث البرنامج', Icons.system_update, 'update_program'),
-                _MenuItem(
-                    'Privacy Policy', Icons.privacy_tip, 'privacy_policy'),
-              ],
-            ),
+            // _buildMenuSection(
+            //   'النسخ الاحتياطي والمساعدة',
+            //   [
+            //     _MenuItem('النسخ الاحتياطي', Icons.backup, 'backup'),
+            //     _MenuItem('النسخ الاحتياطي للبيانات', Icons.cloud_upload,
+            //         'data_backup'),
+            //     _MenuItem('المساعدة', Icons.help, 'help'),
+            //     _MenuItem(
+            //         'تحديث البرنامج', Icons.system_update, 'update_program'),
+            //     _MenuItem(
+            //         'Privacy Policy', Icons.privacy_tip, 'privacy_policy'),
+            //   ],
+            // ),
           ],
         ),
       ),
