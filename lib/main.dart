@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'constants/app_theme.dart';
-import 'screens/splash_screen.dart';
+
+import 'core/constants/app_theme.dart';
+import 'features/splash/presentation/pages/splash_page.dart';
 
 void main() {
   runApp(const MicroPOSApp());
@@ -15,7 +16,7 @@ class MicroPOSApp extends StatelessWidget {
       title: 'MicroPOS - Micro Point of Sale',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
+      home: const SplashPage(),
     );
   }
 }
