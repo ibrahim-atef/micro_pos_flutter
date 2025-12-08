@@ -4,16 +4,16 @@ import 'core/constants/app_theme.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 
 void main() {
-  runApp(const MicroPOSApp());
+  runApp(const MyApp());
 }
 
-class MicroPOSApp extends StatelessWidget {
-  const MicroPOSApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MicroPOS - Micro Point of Sale',
+      title: 'سهل بضاعه',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       home: const SplashPage(),

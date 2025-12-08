@@ -22,7 +22,7 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
         icon: const Icon(Icons.menu),
         onPressed: onMenuClick,
       ),
-      title: const Text('MicroPOS'),
+      title: const Text('سهل بضاعه'),
       actions: [
         Stack(
           children: [

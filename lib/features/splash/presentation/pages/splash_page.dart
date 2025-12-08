@@ -110,7 +110,7 @@ class _SplashPageState extends State<SplashPage>
 
                 // App Title
                 const Text(
-                  'MicroPOS - Micro Point Of Sale',
+                  'سهل بضاعه',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28,

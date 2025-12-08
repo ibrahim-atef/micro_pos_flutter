@@ -1,0 +1,667 @@
+{
+  "base_url": "https://api.micropos.com/api/v1",
+  "endpoints": {
+    "dashboard": {
+      "get_statistics": {
+        "method": "GET",
+        "path": "/dashboard/statistics",
+        "description": "الحصول على إحصائيات لوحة التحكم"
+      }
+    },
+    "sales": {
+      "search_products": {
+        "method": "GET",
+        "path": "/sales/products/search",
+        "query_params": ["q", "barcode"],
+        "description": "البحث عن منتج للبيع"
+      },
+      "search_customers": {
+        "method": "GET",
+        "path": "/sales/customers/search",
+        "query_params": ["q"],
+        "description": "البحث عن عميل"
+      },
+      "create_invoice": {
+        "method": "POST",
+        "path": "/sales/invoices",
+        "description": "إنشاء فاتورة مبيعات"
+      },
+      "get_invoice": {
+        "method": "GET",
+        "path": "/sales/invoices/{invoice_id}",
+        "description": "الحصول على فاتورة مبيعات"
+      },
+      "update_invoice": {
+        "method": "PUT",
+        "path": "/sales/invoices/{invoice_id}",
+        "description": "تحديث فاتورة مبيعات"
+      },
+      "delete_invoice": {
+        "method": "DELETE",
+        "path": "/sales/invoices/{invoice_id}",
+        "description": "حذف فاتورة مبيعات"
+      },
+      "print_invoice": {
+        "method": "GET",
+        "path": "/sales/invoices/{invoice_id}/print",
+        "description": "إعادة طباعة فاتورة مبيعات"
+      },
+      "return_invoice": {
+        "method": "POST",
+        "path": "/sales/invoices/{invoice_id}/return",
+        "description": "إرجاع فاتورة مبيعات"
+      }
+    },
+    "purchases": {
+      "search_products": {
+        "method": "GET",
+        "path": "/purchases/products/search",
+        "query_params": ["q", "barcode"],
+        "description": "البحث عن منتج للشراء"
+      },
+      "search_suppliers": {
+        "method": "GET",
+        "path": "/purchases/suppliers/search",
+        "query_params": ["q"],
+        "description": "البحث عن مورد"
+      },
+      "create_invoice": {
+        "method": "POST",
+        "path": "/purchases/invoices",
+        "description": "إنشاء فاتورة مشتريات"
+      },
+      "get_invoice": {
+        "method": "GET",
+        "path": "/purchases/invoices/{invoice_id}",
+        "description": "الحصول على فاتورة مشتريات"
+      },
+      "update_invoice": {
+        "method": "PUT",
+        "path": "/purchases/invoices/{invoice_id}",
+        "description": "تحديث فاتورة مشتريات"
+      },
+      "delete_invoice": {
+        "method": "DELETE",
+        "path": "/purchases/invoices/{invoice_id}",
+        "description": "حذف فاتورة مشتريات"
+      },
+      "print_invoice": {
+        "method": "GET",
+        "path": "/purchases/invoices/{invoice_id}/print",
+        "description": "إعادة طباعة فاتورة مشتريات"
+      },
+      "return_invoice": {
+        "method": "POST",
+        "path": "/purchases/invoices/{invoice_id}/return",
+        "description": "إرجاع فاتورة مشتريات"
+      },
+      "import_from_purchase_order": {
+        "method": "GET",
+        "path": "/purchases/purchase-orders/{order_id}",
+        "description": "استيراد من طلب شراء"
+      }
+    },
+    "customers": {
+      "list": {
+        "method": "GET",
+        "path": "/customers",
+        "query_params": ["page", "limit", "search"],
+        "description": "الحصول على قائمة العملاء"
+      },
+      "get": {
+        "method": "GET",
+        "path": "/customers/{customer_id}",
+        "description": "الحصول على عميل محدد"
+      },
+      "create": {
+        "method": "POST",
+        "path": "/customers",
+        "description": "إنشاء عميل جديد"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/customers/{customer_id}",
+        "description": "تحديث عميل"
+      },
+      "delete": {
+        "method": "DELETE",
+        "path": "/customers/{customer_id}",
+        "description": "حذف عميل"
+      },
+      "remaining_amounts": {
+        "method": "GET",
+        "path": "/customers/remaining-amounts",
+        "query_params": ["search"],
+        "description": "الحصول على المبالغ المتبقية للعملاء"
+      },
+      "opening_balances": {
+        "method": "GET",
+        "path": "/customers/opening-balances",
+        "query_params": ["search"],
+        "description": "الحصول على الأرصدة الافتتاحية للعملاء"
+      },
+      "statement": {
+        "method": "GET",
+        "path": "/customers/{customer_id}/statement",
+        "query_params": ["from_date", "to_date"],
+        "description": "كشف حساب عميل"
+      },
+      "create_receipt_voucher": {
+        "method": "POST",
+        "path": "/customers/{customer_id}/receipt-vouchers",
+        "description": "إنشاء سند قبض"
+      },
+      "create_payment_voucher": {
+        "method": "POST",
+        "path": "/customers/{customer_id}/payment-vouchers",
+        "description": "إنشاء سند صرف"
+      },
+      "print_voucher": {
+        "method": "GET",
+        "path": "/customers/vouchers/{voucher_id}/print",
+        "description": "إعادة طباعة سند القبض/الصرف"
+      }
+    },
+    "suppliers": {
+      "list": {
+        "method": "GET",
+        "path": "/suppliers",
+        "query_params": ["page", "limit", "search"],
+        "description": "الحصول على قائمة الموردين"
+      },
+      "get": {
+        "method": "GET",
+        "path": "/suppliers/{supplier_id}",
+        "description": "الحصول على مورد محدد"
+      },
+      "create": {
+        "method": "POST",
+        "path": "/suppliers",
+        "description": "إنشاء مورد جديد"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/suppliers/{supplier_id}",
+        "description": "تحديث مورد"
+      },
+      "delete": {
+        "method": "DELETE",
+        "path": "/suppliers/{supplier_id}",
+        "description": "حذف مورد"
+      },
+      "remaining_amounts": {
+        "method": "GET",
+        "path": "/suppliers/remaining-amounts",
+        "query_params": ["search"],
+        "description": "الحصول على المبالغ المتبقية للموردين"
+      },
+      "opening_balances": {
+        "method": "GET",
+        "path": "/suppliers/opening-balances",
+        "query_params": ["search"],
+        "description": "الحصول على الأرصدة الافتتاحية للموردين"
+      },
+      "statement": {
+        "method": "GET",
+        "path": "/suppliers/{supplier_id}/statement",
+        "query_params": ["from_date", "to_date"],
+        "description": "كشف حساب مورد"
+      },
+      "create_voucher": {
+        "method": "POST",
+        "path": "/suppliers/{supplier_id}/vouchers",
+        "description": "إنشاء سند قبض/صرف للمورد"
+      }
+    },
+    "inventory": {
+      "products_list": {
+        "method": "GET",
+        "path": "/inventory/products",
+        "query_params": ["page", "limit", "search", "category_id"],
+        "description": "الحصول على قائمة المنتجات"
+      },
+      "get_product": {
+        "method": "GET",
+        "path": "/inventory/products/{product_id}",
+        "description": "الحصول على منتج محدد"
+      },
+      "create_product": {
+        "method": "POST",
+        "path": "/inventory/products",
+        "description": "إنشاء منتج جديد"
+      },
+      "update_product": {
+        "method": "PUT",
+        "path": "/inventory/products/{product_id}",
+        "description": "تحديث منتج"
+      },
+      "delete_product": {
+        "method": "DELETE",
+        "path": "/inventory/products/{product_id}",
+        "description": "حذف منتج"
+      },
+      "categories_list": {
+        "method": "GET",
+        "path": "/inventory/categories",
+        "description": "الحصول على التصنيفات"
+      },
+      "create_category": {
+        "method": "POST",
+        "path": "/inventory/categories",
+        "description": "إنشاء تصنيف جديد"
+      },
+      "update_category": {
+        "method": "PUT",
+        "path": "/inventory/categories/{category_id}",
+        "description": "تحديث تصنيف"
+      },
+      "delete_category": {
+        "method": "DELETE",
+        "path": "/inventory/categories/{category_id}",
+        "description": "حذف تصنيف"
+      },
+      "units_list": {
+        "method": "GET",
+        "path": "/inventory/units",
+        "description": "الحصول على الوحدات"
+      },
+      "bulk_update_prices": {
+        "method": "POST",
+        "path": "/inventory/products/bulk-update-prices",
+        "description": "تعديل أسعار المنتجات"
+      },
+      "import_excel": {
+        "method": "POST",
+        "path": "/inventory/products/import-excel",
+        "description": "استيراد المنتجات من Excel",
+        "content_type": "multipart/form-data"
+      }
+    },
+    "cash_box": {
+      "get_balance": {
+        "method": "GET",
+        "path": "/cash-box/balance",
+        "description": "الحصول على رصيد الصندوق"
+      },
+      "create_transaction": {
+        "method": "POST",
+        "path": "/cash-box/transactions",
+        "description": "إضافة أو سحب مبلغ من الصندوق"
+      },
+      "get_transactions": {
+        "method": "GET",
+        "path": "/cash-box/transactions",
+        "query_params": ["from_date", "to_date", "page", "limit"],
+        "description": "الحصول على حركات الصندوق"
+      },
+      "delete_transaction": {
+        "method": "DELETE",
+        "path": "/cash-box/transactions/{transaction_id}",
+        "description": "حذف حركة صندوق"
+      }
+    },
+    "expenses": {
+      "list": {
+        "method": "GET",
+        "path": "/expenses",
+        "query_params": ["from_date", "to_date", "page", "limit"],
+        "description": "الحصول على قائمة المصروفات"
+      },
+      "create": {
+        "method": "POST",
+        "path": "/expenses",
+        "description": "إنشاء مصروف جديد"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/expenses/{expense_id}",
+        "description": "تحديث مصروف"
+      },
+      "delete": {
+        "method": "DELETE",
+        "path": "/expenses/{expense_id}",
+        "description": "حذف مصروف"
+      },
+      "get_accounts": {
+        "method": "GET",
+        "path": "/expenses/accounts",
+        "description": "الحصول على حسابات المصروفات"
+      }
+    },
+    "reports": {
+      "customers_merge": {
+        "method": "GET",
+        "path": "/reports/customers/merge",
+        "description": "دمج العملاء"
+      },
+      "customer_statement": {
+        "method": "GET",
+        "path": "/reports/customers/{customer_id}/statement",
+        "query_params": ["from_date", "to_date"],
+        "description": "كشف حساب عميل"
+      },
+      "customer_verification": {
+        "method": "GET",
+        "path": "/reports/customers/{customer_id}/verification",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير مصادقة حساب العميل"
+      },
+      "customer_opening_balance_movement": {
+        "method": "GET",
+        "path": "/reports/customers/{customer_id}/opening-balance-movement",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بحركة الرصيد الافتتاحي والنقد للعميل"
+      },
+      "customer_invoices": {
+        "method": "GET",
+        "path": "/reports/customers/{customer_id}/invoices",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالفواتير لعميل"
+      },
+      "customer_receipt_vouchers": {
+        "method": "GET",
+        "path": "/reports/customers/{customer_id}/receipt-vouchers",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بسندات القبض لعميل"
+      },
+      "store_movement": {
+        "method": "GET",
+        "path": "/reports/store/movement",
+        "query_params": ["from_date", "to_date"],
+        "description": "عرض حركة المتجر"
+      },
+      "store_movement_chart": {
+        "method": "GET",
+        "path": "/reports/store/movement/chart",
+        "query_params": ["from_date", "to_date"],
+        "description": "عرض حركة المتجر - رسم بياني"
+      },
+      "sales_report": {
+        "method": "GET",
+        "path": "/reports/sales",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالمبيعات"
+      },
+      "sales_profits": {
+        "method": "GET",
+        "path": "/reports/sales/profits",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقارير الأرباح"
+      },
+      "sales_invoices": {
+        "method": "GET",
+        "path": "/reports/sales/invoices",
+        "query_params": ["from_date", "to_date", "page", "limit"],
+        "description": "عرض فواتير المبيعات"
+      },
+      "sales_discounts": {
+        "method": "GET",
+        "path": "/reports/sales/discounts",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالخصومات"
+      },
+      "sales_credit_invoices": {
+        "method": "GET",
+        "path": "/reports/sales/credit-invoices",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالفواتير الآجل"
+      },
+      "purchases_report": {
+        "method": "GET",
+        "path": "/reports/purchases",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالمشتريات"
+      },
+      "purchases_invoices": {
+        "method": "GET",
+        "path": "/reports/purchases/invoices",
+        "query_params": ["from_date", "to_date", "page", "limit"],
+        "description": "عرض فواتير المشتريات"
+      },
+      "purchases_return_invoices": {
+        "method": "GET",
+        "path": "/reports/purchases/return-invoices",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالفواتير المرتجع - مشتريات"
+      },
+      "suppliers_remaining": {
+        "method": "GET",
+        "path": "/reports/suppliers/remaining",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالمتبقي للموردين"
+      },
+      "supplier_statement": {
+        "method": "GET",
+        "path": "/reports/suppliers/{supplier_id}/statement",
+        "query_params": ["from_date", "to_date"],
+        "description": "كشف حساب مورد"
+      },
+      "supplier_opening_balance_movement": {
+        "method": "GET",
+        "path": "/reports/suppliers/{supplier_id}/opening-balance-movement",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بحركة الرصيد الافتتاحي والنقد للمورد"
+      },
+      "inventory_stock": {
+        "method": "GET",
+        "path": "/reports/inventory/stock",
+        "query_params": ["date"],
+        "description": "جرد مخزني"
+      },
+      "inventory_stock_by_category": {
+        "method": "GET",
+        "path": "/reports/inventory/stock-by-category",
+        "query_params": ["date", "category_id"],
+        "description": "جرد مخزني حسب التصنيف"
+      },
+      "product_movement": {
+        "method": "GET",
+        "path": "/reports/inventory/products/{product_id}/movement",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بحركة منتج"
+      },
+      "damaged_products": {
+        "method": "GET",
+        "path": "/reports/inventory/damaged-products",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالمنتجات التالفة"
+      },
+      "cash_box_movement": {
+        "method": "GET",
+        "path": "/reports/cash-box/movement",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بحركة الصندوق"
+      },
+      "cash_box_capital": {
+        "method": "GET",
+        "path": "/reports/cash-box/capital",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير رأس المال"
+      },
+      "cash_box_zakat": {
+        "method": "GET",
+        "path": "/reports/cash-box/zakat",
+        "query_params": ["from_date", "to_date"],
+        "description": "حساب الزكاة"
+      },
+      "cash_box_tax_declaration": {
+        "method": "GET",
+        "path": "/reports/cash-box/tax-declaration",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بالإقرار الضريبي"
+      },
+      "expenses_by_category": {
+        "method": "GET",
+        "path": "/reports/expenses/by-category",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بصنيف المصروفات"
+      },
+      "purchase_orders": {
+        "method": "GET",
+        "path": "/reports/expenses/purchase-orders",
+        "query_params": ["from_date", "to_date"],
+        "description": "تقرير بطلبات الشراء"
+      }
+    },
+    "settings": {
+      "get": {
+        "method": "GET",
+        "path": "/settings",
+        "description": "الحصول على الإعدادات"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/settings",
+        "description": "تحديث الإعدادات"
+      },
+      "upload_logo": {
+        "method": "POST",
+        "path": "/settings/upload-logo",
+        "description": "رفع شعار المتجر",
+        "content_type": "multipart/form-data"
+      },
+      "upload_stamp": {
+        "method": "POST",
+        "path": "/settings/upload-stamp",
+        "description": "رفع ختم/توقيع",
+        "content_type": "multipart/form-data"
+      }
+    },
+    "taxes": {
+      "list": {
+        "method": "GET",
+        "path": "/taxes",
+        "description": "الحصول على قائمة الضرائب"
+      },
+      "create": {
+        "method": "POST",
+        "path": "/taxes",
+        "description": "إنشاء ضريبة جديدة"
+      },
+      "update": {
+        "method": "PUT",
+        "path": "/taxes/{tax_id}",
+        "description": "تحديث ضريبة"
+      },
+      "delete": {
+        "method": "DELETE",
+        "path": "/taxes/{tax_id}",
+        "description": "حذف ضريبة"
+      },
+      "get_settings": {
+        "method": "GET",
+        "path": "/taxes/settings",
+        "description": "الحصول على إعدادات الضرائب"
+      },
+      "update_settings": {
+        "method": "PUT",
+        "path": "/taxes/settings",
+        "description": "تحديث إعدادات الضرائب"
+      }
+    },
+    "printer": {
+      "get_settings": {
+        "method": "GET",
+        "path": "/printer/settings",
+        "description": "الحصول على إعدادات الطابعة"
+      },
+      "update_settings": {
+        "method": "PUT",
+        "path": "/printer/settings",
+        "description": "تحديث إعدادات الطابعة"
+      },
+      "get_invoice_labels": {
+        "method": "GET",
+        "path": "/printer/invoice-labels",
+        "description": "الحصول على مسميات الفاتورة"
+      },
+      "update_invoice_labels": {
+        "method": "PUT",
+        "path": "/printer/invoice-labels",
+        "description": "تحديث مسميات الفاتورة"
+      }
+    },
+    "operations": {
+      "update_sales_invoice": {
+        "method": "PUT",
+        "path": "/operations/sales-invoices/{invoice_id}",
+        "description": "تعديل فاتورة مبيعات"
+      },
+      "update_purchases_invoice": {
+        "method": "PUT",
+        "path": "/operations/purchases-invoices/{invoice_id}",
+        "description": "تعديل فاتورة مشتريات"
+      },
+      "delete_invoice": {
+        "method": "DELETE",
+        "path": "/operations/invoices/{invoice_id}",
+        "description": "إلغاء فاتورة مبيعات/مشتريات"
+      },
+      "delete_cash_expense": {
+        "method": "DELETE",
+        "path": "/operations/cash-expenses/{transaction_id}",
+        "description": "إلغاء حركة صندوق/مصروفات"
+      },
+      "delete_voucher": {
+        "method": "DELETE",
+        "path": "/operations/vouchers/{voucher_id}",
+        "description": "إلغاء سند قبض/صرف"
+      },
+      "delete_return_invoice": {
+        "method": "DELETE",
+        "path": "/operations/return-invoices/{invoice_id}",
+        "description": "إلغاء فاتورة مرتجع مبيعات/مشتريات"
+      },
+      "transfer_customer_supplier": {
+        "method": "POST",
+        "path": "/operations/transfer-customer-supplier",
+        "description": "التحويل بين العملاء والموردين"
+      },
+      "damaged_products": {
+        "method": "POST",
+        "path": "/operations/damaged-products",
+        "description": "معالجة المنتجات التالفة"
+      }
+    },
+    "auth": {
+      "login": {
+        "method": "POST",
+        "path": "/auth/login",
+        "description": "تسجيل الدخول"
+      },
+      "logout": {
+        "method": "POST",
+        "path": "/auth/logout",
+        "description": "تسجيل الخروج"
+      },
+      "refresh": {
+        "method": "POST",
+        "path": "/auth/refresh",
+        "description": "تحديث Token"
+      }
+    }
+  },
+  "common": {
+    "authentication": {
+      "type": "Bearer Token",
+      "header": "Authorization",
+      "format": "Bearer {token}"
+    },
+    "date_format": "YYYY-MM-DD",
+    "pagination": {
+      "default_page": 1,
+      "default_limit": 20,
+      "max_limit": 100
+    },
+    "status_codes": {
+      "success": 200,
+      "created": 201,
+      "bad_request": 400,
+      "unauthorized": 401,
+      "forbidden": 403,
+      "not_found": 404,
+      "server_error": 500
+    }
+  }
+}
+

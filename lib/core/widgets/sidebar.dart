@@ -18,6 +18,9 @@ class SidebarMenu extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
+            const SizedBox(
+              height: 50,
+            ),
             // Header
             Container(
               padding: const EdgeInsets.all(16),
@@ -27,7 +30,7 @@ class SidebarMenu extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                'MPOS',
+                'سهل بضاعه',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 18,
